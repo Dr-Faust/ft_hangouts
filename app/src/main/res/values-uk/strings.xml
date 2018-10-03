@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ft_hangouts</string>
+	<string name="select_action">Виберіть дію</string>
+    <string name="action_change_theme">Змінити колір теми</string>
+    <string name="action_delete_contact">Видалити</string>
+	<string name="action_edit_contact">Редагувати</string>
+    <string name="action_copy">Копіювати в буфер обміну</string>
+    <string name="cancel">Скасувати</string>
+    <string name="save">Зберегти</string>
+
+	<string name="question_delete_contact">Видалити цей контакт?</string>
+
+	<!--Toasts-->
+	<string name="text_copied">Текст скопійовано</string>
+
+    <!--Change theme dialog-->
+    <string name="select_theme">Оберіть тему</string>
+    <string name="color_green">Зелений</string>
+    <string name="color_blue">Синій</string>
+    <string name="color_grey">Сірий</string>
+    <string name="color_brown">Коричневий</string>
+    <string name="color_yellow">Жовтий</string>
+
+    <!--Contact photo dialog-->
+    <string name="change_photo">Змінити фото</string>
+    <string name="take_photo">Зробити фото</string>
+    <string name="choose_photo">Вибрати фото</string>
+    <string name="remove_photo">Видалити фото</string>
+    <string name="take_new_photo">Зобити нове фото</string>
+    <string name="select_new_photo">Вибрати нове фото</string>
+
+    <!--input fields-->
+    <string name="first_name">Ім\'я</string>
+    <string name="last_name">Прізвище</string>
+    <string name="phone_number">Телефон</string>
+    <string name="email">E-mail</string>
+    <string name="birthday">День народження</string>
+
+    <!--Intent titles-->
+    <string name="new_contact">Cтворити новий контакт</string>
+    <string name="edit_contact">Змінити контакт</string>
+
+    <!--Permissions requests-->
+    <string name="str_not_now">Не зараз</string>
+    <string name="str_continue">Продовжити</string>
+    <!--Camera and storage-->
+    <string name="request_camera_storage_permission_1">Для створення фото дозвольте ft_hangouts доступ до камери та пам\'яті.</string>
+    <string name="request_camera_storage_permission_2">Щоб зробити фото ft_hangouts потрібен дозвіл на доступ до камери та пам\'яті. Щоб надати дозвіл вручну перейдіть в Налаштування, виберіть Програми, знайдіть ft_hangouts, потім виберіть Дозволи і включіть Камеру і Пам\'ять.</string>
+    <!--Camera-->
+    <string name="request_camera_permission_1">Для створення фото дозвольте ft_hangouts доступ до камери.</string>
+    <string name="request_camera_permission_2">Щоб зробити фото ft_hangouts потрібен дозвіл на доступ до камери. Щоб надати дозвіл вручну перейдіть в Налаштування, виберіть Програми, знайдіть ft_hangouts, потім виберіть Дозволи і включіть Камеру.</string>
+    <!--Storage-->
+    <string name="request_storage_permission_1">Для створення фото дозвольте ft_hangouts доступ до пам\'яті.</string>
+    <string name="request_storage_permission_2">Щоб зробити фото ft_hangouts потрібен дозвіл на доступ до пам\'яті. Щоб надати дозвіл вручну перейдіть в Налаштування, виберіть Програми, знайдіть ft_hangouts, потім виберіть Дозволи і включіть Пам\'ять.</string>
+    <!--Call-->
+    <string name="request_call_permission_1">Для здійснення дзвінка ft_hangouts потрібен доступ до телефону.</string>
+    <string name="request_call_permission_2">Щоб здійснити дзвінок ft_hangouts потрібен дозвіл на доступ до телефону. Щоб надати дозвіл вручну перейдіть в Налаштування, виберіть Програми, знайдіть ft_hangouts, потім виберіть Дозволи і включіть Телефон.</string>
+
+
+
+    <!--Permissions responses-->
+    <!--Camera and storage-->
+    <string name="negative_response_storage_camera_permission">Доступ до пам\'яті та камері не був наданий.</string>
+    <string name="negative_response_camera_permission">Доступ до камери не був наданий.</string>
+    <string name="negative_response_storage_permission">Доступ до пам\'яті не було надано.</string>
+	<!--Call-->
+	<string name="negative_response_call_permission">Доступ до телефону не був наданий.</string>
+
+
+    <string name="fill_in_please">Введіть більше інформації про контакт</string>
+
+    <string name="contact_photo">Фото контакту</string>
+	<string name="contact_first_name">Ім\'я</string>
+	<string name="contact_last_name">Прізвище</string>
+	<string name="contact_phone_number">Номер телефону</string>
+	<string name="contact_name">Ім\'я контакту</string>
+	<string name="label_value">Label value</string>
+	<string name="label_key">Label key</string>
+	<string name="text_message">Текстове повідомлення</string>
+	<string name="send">Надіслати</string>
+	<string name="send_sms">Надіслати SMS</string>
+
+</resources>

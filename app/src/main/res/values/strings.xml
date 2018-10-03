@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ft_hangouts</string>
+	<string name="select_action">Select the action</string>
+    <string name="action_change_theme">Change theme color</string>
+    <string name="action_delete_contact">Delete</string>
+	<string name="action_edit_contact">Edit</string>
+    <string name="action_copy">Copy to clipboard</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+
+	<string name="question_delete_contact">Delete this contact?</string>
+
+	<!--Toasts-->
+	<string name="text_copied">Text copied</string>
+
+    <!--Change theme dialog-->
+    <string name="select_theme">Select theme</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_grey">Grey</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_yellow">Yellow</string>
+
+    <!--Contact photo dialog-->
+    <string name="change_photo">Change photo</string>
+    <string name="take_photo">Take photo</string>
+    <string name="choose_photo">Choose photo</string>
+    <string name="remove_photo">Remove photo</string>
+    <string name="take_new_photo">Take new photo</string>
+    <string name="select_new_photo">Select new photo</string>
+
+    <!--input fields-->
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="email">E-mail</string>
+    <string name="birthday">Birthday</string>
+
+    <!--Intent titles-->
+    <string name="new_contact">Create new contact</string>
+    <string name="edit_contact">Edit contact</string>
+
+    <!--Permissions requests-->
+    <string name="str_not_now">Not now</string>
+    <string name="str_continue">Continue</string>
+    <!--Camera and storage-->
+    <string name="request_camera_storage_permission_1">To capture photos allow ft_hangouts access to the camera and storage.</string>
+    <string name="request_camera_storage_permission_2">ft_hangouts needs the Camera and Storage permission to take photos. Please continue to app settings, select "Permissions", and enable "Camera" and "Storage".</string>
+    <!--Camera-->
+    <string name="request_camera_permission_1">To capture photos allow ft_hangouts access to the camera.</string>
+    <string name="request_camera_permission_2">ft_hangouts needs the Camera permission to take photos. Please continue to app settings, select "Permissions", and enable "Camera".</string>
+    <!--Storage-->
+    <string name="request_storage_permission_1">To capture photos allow ft_hangouts access to the storage.</string>
+    <string name="request_storage_permission_2">ft_hangouts needs the Storage permission to take photos. Please continue to app settings, select "Permissions", and enable "Storage".</string>
+    <!--Call-->
+    <string name="request_call_permission_1">To make a call allow ft_hangouts access to the phone.</string>
+    <string name="request_call_permission_2">t_hangouts needs the Phone permission to take photos. Please continue to app settings, select "Permissions", and enable "Phone".</string>
+
+    <!--Permissions responses-->
+    <!--Camera and storage-->
+    <string name="negative_response_storage_camera_permission">Storage and camera access was not granted.</string>
+    <string name="negative_response_camera_permission">Camera access was not granted.</string>
+    <string name="negative_response_storage_permission">Storage access was not granted.</string>
+    <!--Call-->
+    <string name="negative_response_call_permission">Phone access was not granted.</string>
+
+
+    <string name="fill_in_please">Enter more information about the contact</string>
+
+    <string name="contact_photo">Contact photo</string>
+	<string name="contact_first_name">First name</string>
+	<string name="contact_last_name">Last name</string>
+	<string name="contact_phone_number">Phone number</string>
+	<string name="contact_name">Contact name</string>
+	<string name="label_value">Label value</string>
+	<string name="label_key">Label key</string>
+	<string name="text_message">Text message</string>
+	<string name="send">Send</string>
+	<string name="send_sms">Send SMS</string>
+
+
+</resources>

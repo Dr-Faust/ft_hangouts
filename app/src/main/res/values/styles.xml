@@ -1,0 +1,176 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+                                    <!-- Green application theme. -->
+    <!--=============================================================================================-->
+    <style name="AppTheme.Green">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/dark_green</item>
+        <item name="colorAccent">@color/green</item>
+    </style>
+
+    <style name="AppTheme.Green.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+	<style name="AppTheme.Green.CollapsingToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">#FFF</item>
+		<item name="android:colorBackground">@color/light_green</item>
+	</style>
+
+
+	<style name="DialogTheme.Green" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/dark_green</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog_green</item>
+    </style>
+
+                                    <!-- Blue application theme. -->
+    <!--=============================================================================================-->
+    <style name="AppTheme.Blue">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/blue</item>
+    </style>
+
+    <style name="AppTheme.Blue.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+	<style name="AppTheme.Blue.CollapsingToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">#FFF</item>
+		<item name="android:colorBackground">@color/light_blue</item>
+	</style>
+
+
+	<style name="DialogTheme.Blue" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/dark_blue</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog_blue</item>
+    </style>
+                                    <!-- Grey application theme. -->
+    <!--=============================================================================================-->
+    <style name="AppTheme.Grey">
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorPrimaryDark">@color/dark_grey</item>
+        <item name="colorAccent">@color/grey</item>
+    </style>
+
+    <style name="AppTheme.Grey.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+	<style name="AppTheme.Grey.CollapsingToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">#FFF</item>
+		<item name="android:colorBackground">@color/light_grey</item>
+	</style>
+
+
+	<style name="DialogTheme.Grey" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/dark_grey</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog_grey</item>
+    </style>
+
+                                    <!-- Brown application theme. -->
+    <!--=============================================================================================-->
+    <style name="AppTheme.Brown">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/dark_brown</item>
+        <item name="colorAccent">@color/brown</item>
+    </style>
+
+    <style name="AppTheme.Brown.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+	<style name="AppTheme.Brown.CollapsingToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">#FFF</item>
+		<item name="android:colorBackground">@color/light_brown</item>
+	</style>
+
+
+	<style name="DialogTheme.Brown" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/dark_brown</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog_brown</item>
+    </style>
+
+                                    <!-- Yellow application theme. -->
+    <!--=============================================================================================-->
+    <style name="AppTheme.Yellow">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/dark_yellow</item>
+        <item name="colorAccent">@color/yellow</item>
+    </style>
+
+    <style name="AppTheme.Yellow.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+	<style name="AppTheme.Yellow.CollapsingToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">#FFF</item>
+		<item name="android:colorBackground">@color/light_yellow</item>
+	</style>
+
+    <style name="DialogTheme.Yellow" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/dark_yellow</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog_yellow</item>
+    </style>
+
+    <!--=============================================================================================-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+	<style name="AppTheme.CollapsingAppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">#FFF</item>
+		<item name="android:colorBackground">@color/aluminum</item>
+	</style>
+
+    <style name="PhotoBackground" parent="AppTheme">
+        <item name="android:background">@color/monsoon</item>
+    </style>
+
+	<!--<style name="MyBorderlessBackgroundStyle">-->
+		<!--<item name="android:background">?attr/selectableItemBackgroundBorderless</item>-->
+	<!--</style>-->
+
+	<!--<style name="MyBorderlessBackgroundStyle">-->
+		<!--<item name="android:background">?attr/selectableItemBackground</item>-->
+	<!--</style>-->
+
+</resources>
