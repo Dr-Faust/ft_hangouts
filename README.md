@@ -1,6 +1,7 @@
 Project isn't finished yet.
 
-![alt text](https://raw.githubusercontent.com/Dr-Faust/ft_hangouts/master/Captures/main_screen.png)
+<img src="Captures/main_screen.png" width="280"/> <img src="Captures/create_contact_screen.png" width="280"/> <img src="Captures/contact_info_screen.png" width="280" />
+<img src="Captures/edit_contact_screen.png" width="280" /> <img src="Captures/message_screen.png" width="280" /> <img src="Captures/change_theme_screen.png" width="280" />
 
 #//![Optional Text](../master/Captures/main_screen.png)
 #//![Optional Text](../master/Captures/create_contact_screen.png)
