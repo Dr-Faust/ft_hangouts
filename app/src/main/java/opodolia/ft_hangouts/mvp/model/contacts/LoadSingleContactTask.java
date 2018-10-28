@@ -1,11 +1,11 @@
-package opodolia.ft_hangouts.mvp.model;
+package opodolia.ft_hangouts.mvp.model.contacts;
 
 import android.database.Cursor;
 import android.os.AsyncTask;
 import opodolia.ft_hangouts.common.Contact;
-import opodolia.ft_hangouts.database.ContactTable;
+import opodolia.ft_hangouts.database.TableContacts;
 import opodolia.ft_hangouts.database.DbHelper;
-import opodolia.ft_hangouts.mvp.LoadSingleContactCallback;
+import opodolia.ft_hangouts.mvp.model.contacts.callbacks.LoadSingleContactCallback;
 
 public class LoadSingleContactTask extends AsyncTask<Void, Void, Contact> {
 
@@ -14,7 +14,7 @@ public class LoadSingleContactTask extends AsyncTask<Void, Void, Contact> {
 	private final DbHelper                  dbHelper;
 	private final long                      contactId;
 
-	LoadSingleContactTask(LoadSingleContactCallback callback, DbHelper dbHelper, long contactId) {
+	public LoadSingleContactTask(LoadSingleContactCallback callback, DbHelper dbHelper, long contactId) {
 		this.callback = callback;
 		this.dbHelper = dbHelper;
 		this.contactId = contactId;
@@ -23,24 +23,24 @@ public class LoadSingleContactTask extends AsyncTask<Void, Void, Contact> {
 	@Override
 	protected Contact doInBackground(Void... params) {
 		Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM " +
-			ContactTable.TABLE + " WHERE _id = ?", new String[]{String.valueOf(contactId)});
+			TableContacts.TABLE + " WHERE _id = ?", new String[]{String.valueOf(contactId)});
 		Contact contact = new Contact();
 		if (cursor.getCount() > 0) {
 			cursor.moveToFirst();
-			contact.setId(cursor.getLong(cursor.getColumnIndex(ContactTable.COLUMN.ID)));
+			contact.setId(cursor.getLong(cursor.getColumnIndex(TableContacts.COLUMN.ID)));
 			contact.setFirstName(
-				cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.FIRST_NAME)));
+				cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.FIRST_NAME)));
 			contact.setLastName(
-				cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.LAST_NAME)));
+				cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.LAST_NAME)));
 			contact.setPhoneNumber(
-				cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.PHONE_NUMBER)));
-			contact.setEmail(cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.EMAIL)));
+				cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.PHONE_NUMBER)));
+			contact.setEmail(cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.EMAIL)));
 			contact.setBirthday(
-				cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.BIRTHDAY)));
+				cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.BIRTHDAY)));
 			contact.setContactName(
-				cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.CONTACT_NAME)));
+				cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.CONTACT_NAME)));
 			contact.setPhotoUri(
-				cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN.PHOTO_URI)));
+				cursor.getString(cursor.getColumnIndex(TableContacts.COLUMN.PHOTO_URI)));
 			cursor.close();
 		}
 		return contact;

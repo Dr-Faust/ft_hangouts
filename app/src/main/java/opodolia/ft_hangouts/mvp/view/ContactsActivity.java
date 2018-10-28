@@ -1,6 +1,9 @@
 package opodolia.ft_hangouts.mvp.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,23 +11,29 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.util.List;
+import java.util.Objects;
+
 import opodolia.ft_hangouts.R;
 import opodolia.ft_hangouts.app.MyAppCompat;
 import opodolia.ft_hangouts.common.Contact;
 import opodolia.ft_hangouts.common.contact_adapter.ContactAdapter;
-import opodolia.ft_hangouts.common.OnContactClick;
+import opodolia.ft_hangouts.common.contact_adapter.OnContactClickListener;
 
 import static opodolia.ft_hangouts.app.Config.MENU_DELETE;
 import static opodolia.ft_hangouts.app.Config.MENU_EDIT;
 
-public class ContactsActivity extends MyAppCompat implements OnContactClick {
+public class ContactsActivity extends MyAppCompat implements OnContactClickListener {
+
 	private static String           TAG = ContactsActivity.class.getSimpleName();
+
 	private ContactAdapter          contactAdapter;
 	private RecyclerView            listContacts;
+	public BroadcastReceiver        addContactBroadcast;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,6 +72,22 @@ public class ContactsActivity extends MyAppCompat implements OnContactClick {
 	    listContacts = findViewById(R.id.list_contacts);
 	    FloatingActionButton btnAddContact = findViewById(R.id.add_contact);
 	    btnAddContact.setOnClickListener(v -> presenter.createNewContact());
+
+	    initNewContactReceiver();
+    }
+
+    private void initNewContactReceiver() {
+	    addContactBroadcast = new BroadcastReceiver() {
+		    @Override
+		    public void onReceive(Context context, Intent intent) {
+			    Log.w(TAG, "RECEIVED = " + intent.getAction());
+			    if (Objects.equals(intent.getAction(), "contact.added")) {
+			    	presenter.loadContacts();
+			    }
+		    }
+	    };
+	    IntentFilter intentFilter = new IntentFilter("contact.added");
+	    registerReceiver(addContactBroadcast, intentFilter);
     }
 
     public void loadContacts() {
@@ -144,7 +169,7 @@ public class ContactsActivity extends MyAppCompat implements OnContactClick {
     }
 
 	@Override
-	public void onContactClick(long contactId) {
+	public void onContactClicked(long contactId) {
     	presenter.showContactInfo(contactId);
 	}
 
@@ -162,7 +187,7 @@ public class ContactsActivity extends MyAppCompat implements OnContactClick {
 			new AlertDialog.Builder(this, currentDialogStyle)
 				.setIcon(R.drawable.ic_warning_black)
 				.setTitle(getResources().getString(R.string.question_delete_contact))
-				.setPositiveButton(getResources().getString(R.string.action_delete_contact), (dialog, which) -> {
+				.setPositiveButton(getResources().getString(R.string.action_delete), (dialog, which) -> {
 					presenter.removeContactFromDb(contact.getId(), this);
 				})
 				.setNegativeButton(getResources().getString(R.string.cancel), null)

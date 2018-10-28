@@ -42,7 +42,7 @@ public class ContactHolder extends RecyclerView.ViewHolder implements
 	public void onCreateContextMenu(ContextMenu menu, View view,
 		ContextMenu.ContextMenuInfo menuInfo) {
 		menu.setHeaderTitle(itemView.getResources().getString(R.string.select_action));
-		menu.add(Menu.NONE, MENU_EDIT, 0, itemView.getResources().getString(R.string.action_edit_contact));
-		menu.add(Menu.NONE, MENU_DELETE, 0, itemView.getResources().getString(R.string.action_delete_contact));
+		menu.add(Menu.NONE, MENU_EDIT, 0, itemView.getResources().getString(R.string.action_edit));
+		menu.add(Menu.NONE, MENU_DELETE, 0, itemView.getResources().getString(R.string.action_delete));
 	}
 }

@@ -3,13 +3,15 @@
     <string name="app_name">ft_hangouts</string>
 	<string name="select_action">Выберите действие</string>
     <string name="action_change_theme">Сменить цвет темы</string>
-    <string name="action_delete_contact">Удалить</string>
-	<string name="action_edit_contact">Редактировать</string>
+    <string name="action_delete">Удалить</string>
+	<string name="action_edit">Редактировать</string>
     <string name="action_copy">Копировать в буфер обмена</string>
+    <string name="action_call">Позвонить</string>
     <string name="cancel">Отмена</string>
     <string name="save">Сохранить</string>
 
 	<string name="question_delete_contact">Удалить этот контакт?</string>
+    <string name="question_delete_message">Удалить это сообщение?</string>
 
 	<!--Toasts-->
 	<string name="text_copied">Текст скопирован</string>

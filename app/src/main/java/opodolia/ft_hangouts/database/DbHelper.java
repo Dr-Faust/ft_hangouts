@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "contacts.db";
+    public static final String DB_NAME = "ft_hangouts.db";
     public static final int DB_VERSION = 1;
 
     public DbHelper(Context context) {
@@ -15,10 +15,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(ContactTable.CREATE_SCRIPT);
+        sqLiteDatabase.execSQL(TableContacts.CREATE_SCRIPT);
+        sqLiteDatabase.execSQL(TableMessages.CREATE_SCRIPT);
     }
 
-    @Override public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-    }
+    @Override public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {}
 }

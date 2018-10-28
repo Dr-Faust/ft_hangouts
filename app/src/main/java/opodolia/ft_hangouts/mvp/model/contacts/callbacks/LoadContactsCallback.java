@@ -1,8 +1,8 @@
-package opodolia.ft_hangouts.mvp;
+package opodolia.ft_hangouts.mvp.model.contacts.callbacks;
 
 import java.util.List;
 import opodolia.ft_hangouts.common.Contact;
 
 public interface LoadContactsCallback {
-	void onLoad(List<Contact> contacts);
+	void onContactsLoaded(List<Contact> contacts);
 }

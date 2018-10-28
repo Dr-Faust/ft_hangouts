@@ -1,4 +1,4 @@
-package opodolia.ft_hangouts.mvp;
+package opodolia.ft_hangouts.mvp.model.contacts;
 
 public class ContactData {
 

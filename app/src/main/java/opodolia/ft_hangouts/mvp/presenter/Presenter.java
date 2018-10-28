@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import java.text.ParseException;
@@ -19,29 +20,34 @@ import java.util.Objects;
 import opodolia.ft_hangouts.app.MyAppCompat;
 import opodolia.ft_hangouts.common.Contact;
 import opodolia.ft_hangouts.common.Item;
+import opodolia.ft_hangouts.database.TableMessages;
+import opodolia.ft_hangouts.mvp.model.messages.MessageData;
 import opodolia.ft_hangouts.mvp.view.AddEditContactActivity;
 import opodolia.ft_hangouts.R;
-import opodolia.ft_hangouts.database.ContactTable;
-import opodolia.ft_hangouts.mvp.ContactData;
+import opodolia.ft_hangouts.database.TableContacts;
+import opodolia.ft_hangouts.mvp.model.contacts.ContactData;
 import opodolia.ft_hangouts.mvp.view.ContactInfoActivity;
 import opodolia.ft_hangouts.mvp.view.ContactsActivity;
-import opodolia.ft_hangouts.mvp.model.ContactsModel;
+import opodolia.ft_hangouts.mvp.model.Model;
 import opodolia.ft_hangouts.mvp.view.MessagesActivity;
 import opodolia.ft_hangouts.permissions.PermissionChecker;
+import opodolia.ft_hangouts.utils.SmsReceiver;
 
 
-public class ContactsPresenter {
+public class Presenter {
 
     private ContactsActivity        contactsActivity;
 	private AddEditContactActivity  addEditContactActivity;
 	private ContactInfoActivity     contactInfoActivity;
-    private ContactsModel           model;
-	private static String           TAG = ContactsPresenter.class.getSimpleName();
+	private MessagesActivity        messagesActivity;
+	private SmsReceiver             smsReceiver;
+    private Model                   model;
+	private static String           TAG = Presenter.class.getSimpleName();
 
-	public ContactsPresenter() {
+	public Presenter() {
 	}
 
-    public ContactsPresenter(ContactsModel model) {
+    public Presenter(Model model) {
         this.model = model;
     }
 
@@ -55,6 +61,14 @@ public class ContactsPresenter {
 
 	public void attachView(ContactInfoActivity contactInfoActivity) {
 		this.contactInfoActivity = contactInfoActivity;
+	}
+
+	public void attachView(MessagesActivity messagesActivity) {
+		this.messagesActivity= messagesActivity;
+	}
+
+	public void attachView(SmsReceiver smsReceiver) {
+		this.smsReceiver= smsReceiver;
 	}
 
     public void loadContacts() {
@@ -86,7 +100,7 @@ public class ContactsPresenter {
 	}
 
     public void addContactToDb() {
-        ContactData contactData = addEditContactActivity. getRetainedContactData();
+        ContactData contactData = addEditContactActivity.getRetainedContactData();
         if (TextUtils.isEmpty(contactData.getFirstName()) &&
 	        TextUtils.isEmpty(contactData.getLastName()) &&
 	        TextUtils.isEmpty(contactData.getPhoneNumber()) &&
@@ -96,19 +110,34 @@ public class ContactsPresenter {
         }
 
         ContentValues cv = new ContentValues(2);
-        cv.put(ContactTable.COLUMN.FIRST_NAME, contactData.getFirstName());
-	    cv.put(ContactTable.COLUMN.LAST_NAME, contactData.getLastName());
-	    cv.put(ContactTable.COLUMN.PHONE_NUMBER, contactData.getPhoneNumber());
-        cv.put(ContactTable.COLUMN.EMAIL, contactData.getEmail());
-	    cv.put(ContactTable.COLUMN.BIRTHDAY, contactData.getBirthday());
-	    cv.put(ContactTable.COLUMN.CONTACT_NAME, contactData.getContactName());
-	    cv.put(ContactTable.COLUMN.PHOTO_URI, contactData.getPhotoUri());
+        cv.put(TableContacts.COLUMN.FIRST_NAME, contactData.getFirstName());
+	    cv.put(TableContacts.COLUMN.LAST_NAME, contactData.getLastName());
+	    cv.put(TableContacts.COLUMN.PHONE_NUMBER, contactData.getPhoneNumber());
+        cv.put(TableContacts.COLUMN.EMAIL, contactData.getEmail());
+	    cv.put(TableContacts.COLUMN.BIRTHDAY, contactData.getBirthday());
+	    cv.put(TableContacts.COLUMN.CONTACT_NAME, contactData.getContactName());
+	    cv.put(TableContacts.COLUMN.PHOTO_URI, contactData.getPhotoUri());
         model.addContact(cv, () -> {
+	        Log.i(TAG, "CONTACT ADDED!");
 	        Intent intent = new Intent(addEditContactActivity, ContactsActivity.class);
 	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	        addEditContactActivity.startActivity(intent);
         });
     }
+
+	public void addContactToDb(ContactData contactData) {
+		ContentValues cv = new ContentValues(2);
+		cv.put(TableContacts.COLUMN.FIRST_NAME, contactData.getFirstName());
+		cv.put(TableContacts.COLUMN.LAST_NAME, contactData.getLastName());
+		cv.put(TableContacts.COLUMN.PHONE_NUMBER, contactData.getPhoneNumber());
+		cv.put(TableContacts.COLUMN.EMAIL, contactData.getEmail());
+		cv.put(TableContacts.COLUMN.BIRTHDAY, contactData.getBirthday());
+		cv.put(TableContacts.COLUMN.CONTACT_NAME, contactData.getContactName());
+		cv.put(TableContacts.COLUMN.PHOTO_URI, contactData.getPhotoUri());
+		model.addContact(cv, () -> {
+			Log.i(TAG, "CONTACT ADDED!");
+		});
+	}
 
 	public void editContactInDb(long contactId, Boolean calledFromContactsActivity) {
 		ContactData contactData = addEditContactActivity.getRetainedContactData();
@@ -121,13 +150,13 @@ public class ContactsPresenter {
 		}
 
 		ContentValues cv = new ContentValues(2);
-		cv.put(ContactTable.COLUMN.FIRST_NAME, contactData.getFirstName());
-		cv.put(ContactTable.COLUMN.LAST_NAME, contactData.getLastName());
-		cv.put(ContactTable.COLUMN.PHONE_NUMBER, contactData.getPhoneNumber());
-		cv.put(ContactTable.COLUMN.EMAIL, contactData.getEmail());
-		cv.put(ContactTable.COLUMN.BIRTHDAY, contactData.getBirthday());
-		cv.put(ContactTable.COLUMN.CONTACT_NAME, contactData.getContactName());
-		cv.put(ContactTable.COLUMN.PHOTO_URI, contactData.getPhotoUri());
+		cv.put(TableContacts.COLUMN.FIRST_NAME, contactData.getFirstName());
+		cv.put(TableContacts.COLUMN.LAST_NAME, contactData.getLastName());
+		cv.put(TableContacts.COLUMN.PHONE_NUMBER, contactData.getPhoneNumber());
+		cv.put(TableContacts.COLUMN.EMAIL, contactData.getEmail());
+		cv.put(TableContacts.COLUMN.BIRTHDAY, contactData.getBirthday());
+		cv.put(TableContacts.COLUMN.CONTACT_NAME, contactData.getContactName());
+		cv.put(TableContacts.COLUMN.PHOTO_URI, contactData.getPhotoUri());
 		model.editContact(cv, contactId, () -> {
 			Intent intent;
 			if (calledFromContactsActivity) {
@@ -199,4 +228,56 @@ public class ContactsPresenter {
 			}
 		}
     }
+
+	public void loadMessages(String phoneNumber) {
+		model.loadMessages(phoneNumber.replaceAll("[^0-9]", ""), messages -> messagesActivity.showMessages(messages));
+	}
+
+	public void addMessageToDb() {
+		MessageData messageData = messagesActivity.getRetainedMessageData();
+		if (TextUtils.isEmpty(messageData.getMessageText())) {
+			return;
+		}
+
+		ContentValues cv = new ContentValues(2);
+		cv.put(TableMessages.COLUMN.MESSAGE_TEXT, messageData.getMessageText());
+		cv.put(TableMessages.COLUMN.MESSAGE_TIME, messageData.getMessageTime());
+		cv.put(TableMessages.COLUMN.PHONE_NUMBER, messageData.getPhoneNumber().replaceAll("[^0-9]", ""));
+		cv.put(TableMessages.COLUMN.IS_MY_MESSAGE, messageData.getMyMessage().toString());
+		Log.w(TAG, "MY MESSAGE = " + messageData.getMyMessage());
+		model.addMessage(cv, () -> {
+			Log.i(TAG, "MESSAGE ADDED!");
+			loadMessages(messagesActivity.getPhoneNumber());
+			SmsManager manager = SmsManager.getDefault();
+			manager.sendTextMessage(messageData.getPhoneNumber(), null,
+				messageData.getMessageText(), null, null);
+		});
+	}
+
+	public void addMessageToDb(MessageData messageData) {
+		if (TextUtils.isEmpty(messageData.getMessageText())) {
+			return;
+		}
+
+		ContentValues cv = new ContentValues(2);
+		cv.put(TableMessages.COLUMN.MESSAGE_TEXT, messageData.getMessageText());
+		cv.put(TableMessages.COLUMN.MESSAGE_TIME, messageData.getMessageTime());
+		cv.put(TableMessages.COLUMN.PHONE_NUMBER, messageData.getPhoneNumber().replaceAll("[^0-9]", ""));
+		cv.put(TableMessages.COLUMN.IS_MY_MESSAGE, messageData.getMyMessage().toString());
+		Log.w(TAG, "MY MESSAGE = " + messageData.getMyMessage());
+		model.addMessage(cv, () -> {
+			Log.i(TAG, "MESSAGE ADDED!");
+		});
+	}
+
+	public void removeMessageFromDb(long messageId) {
+		model.deleteMessage(messageId, () -> {
+			Log.i(TAG, "MESSAGE REMOVED!");
+			loadMessages(messagesActivity.getPhoneNumber());
+		});
+	}
+
+	public void checkIfPhoneExists(String phoneNumber) {
+		model.checkIfPhoneExists(phoneNumber, exists -> smsReceiver.createNewContact(exists));
+	}
 }

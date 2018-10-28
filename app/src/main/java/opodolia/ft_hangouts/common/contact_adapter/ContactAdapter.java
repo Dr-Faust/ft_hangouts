@@ -1,5 +1,6 @@
 package opodolia.ft_hangouts.common.contact_adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,19 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 import opodolia.ft_hangouts.R;
 import opodolia.ft_hangouts.common.Contact;
-import opodolia.ft_hangouts.common.OnContactClick;
+import opodolia.ft_hangouts.mvp.view.MessagesActivity;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactHolder>
-	implements View.OnClickListener, View.OnLongClickListener {
+public class ContactAdapter extends RecyclerView.Adapter<ContactHolder> implements
+	View.OnClickListener, View.OnLongClickListener {
 
-	private final OnContactClick mOnContactClick;
+	private static String           TAG = ContactAdapter.class.getSimpleName();
+
+	private final OnContactClickListener mOnContactClickListener;
 	private List<Contact> contactData = new ArrayList<>();
 	private Contact contact;
 
-	public ContactAdapter(OnContactClick mOnContactClick) {
-		this.mOnContactClick = mOnContactClick;
+	public ContactAdapter(OnContactClickListener mOnContactClickListener) {
+		this.mOnContactClickListener = mOnContactClickListener;
 	}
 
+	@NonNull
 	@Override
 	public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contact_summary, parent, false);
@@ -46,7 +50,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactHolder>
 		contactData.clear();
 		contactData.addAll(contacts);
 		notifyDataSetChanged();
-		Log.d("QWEEE", "size  = " + getItemCount());
+		Log.d(TAG, "CONTACTS SIZE = " + getItemCount());
 	}
 
 	public Contact getContact() {
@@ -60,7 +64,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactHolder>
 	@Override
 	public void onClick(View view) {
 		Contact contact = (Contact) view.getTag();
-		mOnContactClick.onContactClick(contact.getId());
+		mOnContactClickListener.onContactClicked(contact.getId());
 	}
 
 	@Override

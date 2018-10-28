@@ -20,21 +20,22 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<!--<include layout="@layout/content_messages"/>-->
-
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/list_messages"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_marginBottom="38dp"
+		android:paddingBottom="25dp"
 		android:overScrollMode="never"
-		app:layout_anchorGravity="top"
+		app:stackFromEnd="true"
+		app:reverseLayout="true"
+		app:layout_anchorGravity="bottom"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 	</android.support.v7.widget.RecyclerView>
 
 	<android.support.v7.widget.CardView
-		android:id="@+id/cv_message"
+		android:id="@+id/cv_message_input"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="16dp"
@@ -49,7 +50,7 @@
 			android:orientation="horizontal">
 
 			<EditText
-				android:id="@+id/text_message"
+				android:id="@+id/et_text_message"
 				android:layout_width="0dp"
 				android:layout_height="match_parent"
 				android:layout_weight="1"

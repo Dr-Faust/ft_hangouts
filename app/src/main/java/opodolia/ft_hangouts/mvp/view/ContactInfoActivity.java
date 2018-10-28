@@ -107,10 +107,12 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 		appBarLayout.setBackgroundColor(
 			getResources().getColor(currentCollapsingToolbarBackgroundColor));
 
-		collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-		collapsingToolbar.setTitle(contact.getContactName());
-
 		toolbar = findViewById(R.id.anim_toolbar);
+		toolbar.inflateMenu(R.menu.menu_contact_info);
+		toolbar.setTitle(contact.getContactName());
+
+		collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+
 		setSupportActionBar(toolbar);
 
 		setContactPhoto();
@@ -145,7 +147,7 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		getMenuInflater().inflate(R.menu.menu_save_delete, menu);
+		getMenuInflater().inflate(R.menu.menu_contact_info, menu);
 		return true;
 	}
 
@@ -160,7 +162,7 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 				new AlertDialog.Builder(this, currentDialogStyle)
 					.setIcon(R.drawable.ic_warning_black)
 					.setTitle(getResources().getString(R.string.question_delete_contact))
-					.setPositiveButton(getResources().getString(R.string.action_delete_contact), (dialog, which) -> {
+					.setPositiveButton(getResources().getString(R.string.action_delete), (dialog, which) -> {
 						presenter.removeContactFromDb(contact.getId(), this);
 					})
 					.setNegativeButton(getResources().getString(R.string.cancel), null)

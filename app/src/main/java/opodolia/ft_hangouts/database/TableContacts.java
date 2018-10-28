@@ -1,8 +1,8 @@
 package opodolia.ft_hangouts.database;
 
-public class ContactTable {
+public class TableContacts {
 
-    public static final String TABLE = "contacts_table";
+    public static final String TABLE = "table_contacts";
 
     public static class COLUMN {
         public static final String ID = "_id";

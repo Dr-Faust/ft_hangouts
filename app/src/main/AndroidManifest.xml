@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -46,7 +47,8 @@
         </activity>
 
         <activity
-            android:name=".mvp.view.AddEditContactActivity">
+            android:name=".mvp.view.AddEditContactActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
@@ -56,6 +58,14 @@
         <activity
             android:name=".mvp.view.MessagesActivity">
         </activity>
+
+        <!-- SMS Receiver -->
+        <receiver android:name=".utils.SmsReceiver"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="99999">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 

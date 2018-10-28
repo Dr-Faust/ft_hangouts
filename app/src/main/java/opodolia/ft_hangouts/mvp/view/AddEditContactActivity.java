@@ -40,7 +40,7 @@ import opodolia.ft_hangouts.utils.RetainedContactData;
 import opodolia.ft_hangouts.app.Config;
 import opodolia.ft_hangouts.app.MyAppCompat;
 import opodolia.ft_hangouts.utils.CompareDrawablesKt;
-import opodolia.ft_hangouts.mvp.ContactData;
+import opodolia.ft_hangouts.mvp.model.contacts.ContactData;
 import opodolia.ft_hangouts.permissions.PermissionChecker;
 
 public class AddEditContactActivity extends MyAppCompat implements Toolbar.OnMenuItemClickListener,
@@ -163,7 +163,7 @@ public class AddEditContactActivity extends MyAppCompat implements Toolbar.OnMen
 	{
 		//setting up toolbar, back button and save button
 		Toolbar toolbar = findViewById(R.id.toolbar_contacts);
-		toolbar.inflateMenu(R.menu.menu_add_edit);
+		toolbar.inflateMenu(R.menu.menu_edd_edit_contact);
 		toolbar.setOnMenuItemClickListener(this);
 
 		toolbar.setNavigationIcon(R.drawable.ic_close_white);

@@ -12,8 +12,8 @@ import java.util.Locale;
 
 import opodolia.ft_hangouts.R;
 import opodolia.ft_hangouts.database.DbHelper;
-import opodolia.ft_hangouts.mvp.model.ContactsModel;
-import opodolia.ft_hangouts.mvp.presenter.ContactsPresenter;
+import opodolia.ft_hangouts.mvp.model.Model;
+import opodolia.ft_hangouts.mvp.presenter.Presenter;
 
 @SuppressLint("Registered")
 public class MyAppCompat extends AppCompatActivity
@@ -22,7 +22,7 @@ public class MyAppCompat extends AppCompatActivity
     public static int           currentDialogStyle = R.style.DialogTheme_Green;
 	public static int           currentCollapsingToolbarBackgroundColor = R.color.light_green;
     private Calendar            date = null;
-    protected ContactsPresenter presenter;
+    protected Presenter         presenter;
 
 
     @Override
@@ -61,8 +61,8 @@ public class MyAppCompat extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         DbHelper dbHelper = new DbHelper(this);
-        ContactsModel contactsModel = new ContactsModel(dbHelper);
-	    presenter = new ContactsPresenter(contactsModel);
+        Model model = new Model(dbHelper);
+	    presenter = new Presenter(model);
 	}
 
     @Override
