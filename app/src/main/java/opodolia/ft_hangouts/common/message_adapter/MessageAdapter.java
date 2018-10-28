@@ -43,6 +43,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageHolder>
 		Message message = messages.get(position);
 		holder.bind(message);
 		holder.itemView.setTag(message);
+		holder.itemView.setOnLongClickListener(this);
 	}
 
 	@Override

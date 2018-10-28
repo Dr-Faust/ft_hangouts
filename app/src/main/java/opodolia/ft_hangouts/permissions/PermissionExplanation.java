@@ -24,28 +24,6 @@ public class PermissionExplanation
 		this.currentDialogStyle = currentDialogStyle;
 	}
 
-//	public void showLocationExplanationDialog()
-//	{
-//		AlertDialog.Builder builder = new AlertDialog.Builder(context, currentDialogStyle);
-//		builder.setCancelable(false);
-//		builder.setTitle(context.getString(R.string.request_location_permission_1_title));
-//		builder.setMessage(context.getString(R.string.request_location_permission_1));
-//
-//		builder.setPositiveButton(context.getString(R.string.str_continue),
-//				new DialogInterface.OnClickListener()
-//				{
-//					@Override
-//					public void onClick(DialogInterface paramDialogInterface, int paramInt)
-//					{
-//						Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//						context.startActivity(myIntent);
-//					}
-//				});
-//
-//		AlertDialog dialog = builder.create();
-//		dialog.show();
-//	}
-
 	public void showFirstExplanationDialog(final int REQUEST, final String[] PERMISSIONS, String explanation)
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(context, currentDialogStyle);

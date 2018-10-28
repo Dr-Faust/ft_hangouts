@@ -22,70 +22,47 @@ public class PermissionChecker
 		permissionExplanation = new PermissionExplanation(mContext, currentDialogStyle);
 	}
 
-//	public void smsPermissionChecker()
-//	{
-//		if (ActivityCompat.checkSelfPermission(mContext,
-//				Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED
-//				&& ActivityCompat.checkSelfPermission(mContext,
-//				Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED)
-//		{
-//
-//			boolean requestPermission = ActivityCompat.shouldShowRequestPermissionRationale(
-//					mActivity, Manifest.permission.READ_SMS)
-//					|| ActivityCompat.shouldShowRequestPermissionRationale(
-//					mActivity, Manifest.permission.RECEIVE_SMS);
-//
-//			if (requestPermission)
-//			{
-//				String[] PERMISSIONS = {
-//						Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS
-//				};
-//				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_SMS_PERMISSION, PERMISSIONS,
-//						mContext.getString(R.string.request_sms_permission_1));
-//			}
-//			//            else
-//			//                permissionExplanation.showLastExplanationDialog(
-//			//                        getString(R.string.request_sms_permission_2));
-//		}
-//	}
-//
-//	public boolean locationPermissionChecker(Boolean paused)
-//	{
-//		if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//				|| ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-//		{
-//			boolean permissionGranted = ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.ACCESS_FINE_LOCATION)
-//					|| ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION);
-//
-//			if (permissionGranted && !paused)
-//			{
-//				String[] PERMISSIONS = {
-//						Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-//				};
-//				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_LOCATION_PERMISSION, PERMISSIONS,
-//						mContext.getString(R.string.request_location_permission_2));
-//			} else if (!permissionGranted && !paused)
-//				permissionExplanation.showLastExplanationDialog(mContext.getString(R.string.request_location_permission_3));
-//			return false;
-//		}
-//		return true;
-//	}
-//
+	public void smsPermissionChecker()
+	{
+		if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED
+			&& ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED
+			&& ActivityCompat.checkSelfPermission(mContext, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
+		{
+
+			boolean requestPermission = ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_SMS)
+				|| ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.RECEIVE_SMS)
+				|| ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.SEND_SMS);
+
+			if (requestPermission)
+			{
+				String[] PERMISSIONS = {
+					Manifest.permission.READ_SMS,
+					Manifest.permission.RECEIVE_SMS,
+					Manifest.permission.SEND_SMS,
+				};
+				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_SMS_PERMISSION, PERMISSIONS,
+					mContext.getString(R.string.request_sms_permission_1));
+			}
+			else
+				permissionExplanation.showLastExplanationDialog(mContext.getString(R.string.request_sms_permission_2));
+		}
+	}
+
 	public void callPermissionChecker()
 	{
 		if (ActivityCompat.checkSelfPermission(mContext,
-				Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+			Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
 		{
 			boolean permissionGranted = ActivityCompat.shouldShowRequestPermissionRationale(
-					mActivity, Manifest.permission.CALL_PHONE);
+				mActivity, Manifest.permission.CALL_PHONE);
 
 			if (permissionGranted)
 			{
 				String[] PERMISSIONS = {
-						Manifest.permission.CALL_PHONE
+					Manifest.permission.CALL_PHONE
 				};
 				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_CALL_PERMISSION, PERMISSIONS,
-						mContext.getString(R.string.request_call_permission_1));
+					mContext.getString(R.string.request_call_permission_1));
 			}
 			else
 				permissionExplanation.showLastExplanationDialog(mContext.getString(R.string.request_call_permission_2));
@@ -95,62 +72,62 @@ public class PermissionChecker
 	public void cameraStoragePermissionChecker()
 	{
 		if (ActivityCompat.checkSelfPermission(mContext,
-				Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-				&& ActivityCompat.checkSelfPermission(mContext,
-				Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+			Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+			&& ActivityCompat.checkSelfPermission(mContext,
+			Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
 		{
 			boolean permissionGranted = ActivityCompat.shouldShowRequestPermissionRationale(
-					mActivity, Manifest.permission.CAMERA)
-					|| ActivityCompat.shouldShowRequestPermissionRationale(
-					mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+				mActivity, Manifest.permission.CAMERA)
+				|| ActivityCompat.shouldShowRequestPermissionRationale(
+				mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 			if (permissionGranted)
 			{
 				String[] PERMISSIONS = {
-						Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+					Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
 				};
 				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_CAMERA_STORAGE_PERMISSION,
-						PERMISSIONS, mContext.getString(R.string.request_camera_storage_permission_1));
+					PERMISSIONS, mContext.getString(R.string.request_camera_storage_permission_1));
 			}
 			else
 				permissionExplanation.showLastExplanationDialog(mContext.getString(R.string.
-						request_camera_storage_permission_2));
+					request_camera_storage_permission_2));
 		}
 		else if (ActivityCompat.checkSelfPermission(mContext,
-				Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+			Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
 		{
 			boolean permissionGranted = ActivityCompat.shouldShowRequestPermissionRationale(
-					mActivity, Manifest.permission.CAMERA);
+				mActivity, Manifest.permission.CAMERA);
 
 			if (permissionGranted)
 			{
 				String[] PERMISSIONS = {
-						Manifest.permission.CAMERA
+					Manifest.permission.CAMERA
 				};
 				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_CAMERA_PERMISSION, PERMISSIONS,
-						mContext.getString(R.string.request_camera_permission_1));
+					mContext.getString(R.string.request_camera_permission_1));
 			}
 			else
 				permissionExplanation.showLastExplanationDialog(mContext.getString(R.string.
-						request_camera_permission_2));
+					request_camera_permission_2));
 		}
 		else if (ActivityCompat.checkSelfPermission(mContext,
-				Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+			Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
 		{
 			boolean permissionGranted = ActivityCompat.shouldShowRequestPermissionRationale(
-					mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+				mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 			if (permissionGranted)
 			{
 				String[] PERMISSIONS = {
-						Manifest.permission.WRITE_EXTERNAL_STORAGE
+					Manifest.permission.WRITE_EXTERNAL_STORAGE
 				};
 				permissionExplanation.showFirstExplanationDialog(Config.REQUEST_STORAGE_PERMISSION, PERMISSIONS,
-						mContext.getString(R.string.request_storage_permission_1));
+					mContext.getString(R.string.request_storage_permission_1));
 			}
 			else
 				permissionExplanation.showLastExplanationDialog(mContext.getString(R.string.
-						request_storage_permission_2));
+					request_storage_permission_2));
 		}
 	}
 }

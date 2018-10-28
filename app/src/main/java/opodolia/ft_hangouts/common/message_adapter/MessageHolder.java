@@ -26,6 +26,7 @@ public class MessageHolder extends RecyclerView.ViewHolder implements
 		super(itemView);
 		messageTextLeft = itemView.findViewById(R.id.tv_left_message);
 		messageTextRight = itemView.findViewById(R.id.tv_right_message);
+		itemView.setOnCreateContextMenuListener(this);
 
 		DisplayMetrics displaymetrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);

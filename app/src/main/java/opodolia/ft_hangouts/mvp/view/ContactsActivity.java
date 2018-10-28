@@ -1,12 +1,15 @@
 package opodolia.ft_hangouts.mvp.view;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,6 +58,17 @@ public class ContactsActivity extends MyAppCompat implements OnContactClickListe
 		loadContacts();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.d(TAG, "DESTROYING!!!");
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED
+			&& ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+			&& ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+			unregisterReceiver(addContactBroadcast);
+		}
+	}
+
 	private void setContactAdapter() {
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -62,7 +76,6 @@ public class ContactsActivity extends MyAppCompat implements OnContactClickListe
 		contactAdapter = new ContactAdapter(this);
 
 		listContacts.setLayoutManager(layoutManager);
-		listContacts.setAdapter(contactAdapter);
 	}
 
     private void initViews() {
@@ -97,6 +110,7 @@ public class ContactsActivity extends MyAppCompat implements OnContactClickListe
 
 	public void showContacts(List<Contact> contacts) {
 		contactAdapter.setContactData(contacts);
+		listContacts.setAdapter(contactAdapter);
 	}
 
     @Override

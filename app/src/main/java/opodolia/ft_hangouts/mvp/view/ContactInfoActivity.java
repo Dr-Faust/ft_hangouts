@@ -1,5 +1,6 @@
 package opodolia.ft_hangouts.mvp.view;
 
+import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,15 +21,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import opodolia.ft_hangouts.R;
 import opodolia.ft_hangouts.app.Config;
 import opodolia.ft_hangouts.app.MyAppCompat;
 import opodolia.ft_hangouts.common.Contact;
+import opodolia.ft_hangouts.permissions.PermissionChecker;
 import opodolia.ft_hangouts.utils.DividerItemDecorator;
 import opodolia.ft_hangouts.common.Item;
 import opodolia.ft_hangouts.common.OnItemClick;
@@ -39,17 +45,16 @@ import static opodolia.ft_hangouts.app.Config.MENU_COPY_PHONE;
 
 public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 
-	private static String           TAG = ContactInfoActivity.class.getSimpleName();
-	private Toolbar                 toolbar;
+	private static String TAG = ContactInfoActivity.class.getSimpleName();
+	private Toolbar toolbar;
 	private CollapsingToolbarLayout collapsingToolbar;
-	private AppBarLayout            appBarLayout;
-	private Contact                 contact;
-	private ImageView               contactPhoto;
-	private String                  contactPhotoUri;
+	private AppBarLayout appBarLayout;
+	private Contact contact;
+	private ImageView contactPhoto;
+	private String contactPhotoUri;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contact_info);
 
@@ -57,7 +62,7 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 	}
 
 
-	private ArrayList<Item>  createListItems(Contact contact) {
+	private ArrayList<Item> createListItems(Contact contact) {
 		ArrayList<Item> items = new ArrayList<>();
 
 		Map<String, String> contactInfo = new LinkedHashMap<>();
@@ -78,7 +83,7 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 
 	private void setContactPhoto() {
 		contactPhoto = findViewById(R.id.collapsing_contact_photo);
-		contactPhotoUri =  contact.getPhotoUri();
+		contactPhotoUri = contact.getPhotoUri();
 		Log.i(TAG, "URI = " + contactPhotoUri);
 		if (!contactPhotoUri.equals(""))
 			Glide.with(ContactInfoActivity.this)
@@ -123,7 +128,7 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 	}
 
 	private void loadSingleContact() {
-		long contactId =  getIntent().getLongExtra("contact_id", -1);
+		long contactId = getIntent().getLongExtra("contact_id", -1);
 
 		presenter.attachView(ContactInfoActivity.this);
 		presenter.loadSingleContact(contactId);
@@ -141,19 +146,22 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 
 	@Override
 	public void onItemClick() {
+		new PermissionChecker(this, MyAppCompat.currentDialogStyle).smsPermissionChecker();
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED
+			|| ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED
+			|| ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
+			return;
 		presenter.openMessageActivity(contact);
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_contact_info, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
+	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_edit:
 				presenter.editContact(contact, this);
@@ -173,10 +181,8 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-	{
-		if (requestCode == Config.REQUEST_CALL_PERMISSION)
-		{
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == Config.REQUEST_CALL_PERMISSION) {
 			Log.e(TAG, "Received response for CALL permission request.");
 
 			boolean permission = true;
@@ -190,13 +196,37 @@ public class ContactInfoActivity extends MyAppCompat implements OnItemClick {
 				if (result != PackageManager.PERMISSION_GRANTED)
 					permission = false;
 
-			if (permission)
-			{
-				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contact.getPhoneNumber()));
+			if (permission) {
+				Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contact.getPhoneNumber()));
+				if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+					return;
+				}
 				startActivity(intent);
 			}
 			else
 				Toast.makeText(this, getString(R.string.negative_response_call_permission),
+					Toast.LENGTH_SHORT).show();
+		}
+		else if (requestCode == Config.REQUEST_SMS_PERMISSION)
+		{
+			Log.e(TAG, "Received response for SMS permissions request.");
+
+			boolean permission = true;
+			// We have requested multiple permissions for contacts, so all of them need to be
+			// checked.
+			if (grantResults.length < 1)
+				permission = false;
+
+			// Verify that each required permission has been granted, otherwise return false.
+			for (int result : grantResults)
+				if (result != PackageManager.PERMISSION_GRANTED)
+					permission = false;
+
+			if (permission) {
+				presenter.openMessageActivity(contact);
+			}
+			else
+				Toast.makeText(this, getString(R.string.negative_response_sms_permission),
 					Toast.LENGTH_SHORT).show();
 		}
 		else

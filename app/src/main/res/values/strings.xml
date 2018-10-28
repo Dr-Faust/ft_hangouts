@@ -58,6 +58,11 @@
     <!--Call-->
     <string name="request_call_permission_1">To make a call allow ft_hangouts access to the phone.</string>
     <string name="request_call_permission_2">t_hangouts needs the Phone permission to take photos. Please continue to app settings, select "Permissions", and enable "Phone".</string>
+    <!--SMS-->
+    <string name="request_sms_permission_1">To send and read messages allow ft_hangouts access to SMS.</string>
+    <string name="request_sms_permission_2">To send and read messages allow ft_hangouts access to SMS. Please continue to app settings, select "Permissions", and enable "SMS".</string>
+
+
 
     <!--Permissions responses-->
     <!--Camera and storage-->
@@ -66,6 +71,9 @@
     <string name="negative_response_storage_permission">Storage access was not granted.</string>
     <!--Call-->
     <string name="negative_response_call_permission">Phone access was not granted.</string>
+    <!--SMS-->
+    <string name="positive_response_sms_permission">SMS access was granted.</string>
+    <string name="negative_response_sms_permission">SMS access was not granted.</string>
 
 
     <string name="fill_in_please">Enter more information about the contact</string>

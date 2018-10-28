@@ -39,6 +39,10 @@ public class SmsReceiver extends BroadcastReceiver {
                         currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj);
                     senderAddress = currentMessage.getDisplayOriginatingAddress();
                     String message = currentMessage.getDisplayMessageBody();
+                    if (senderAddress.length() == 13)
+                    	senderAddress = senderAddress.substring(0,4) + " "
+		                    + senderAddress.substring(4,6) + " " + senderAddress.substring(6,9)
+		                    + "-" + senderAddress.substring(9,11) + "-" + senderAddress.substring(11,13);
 
                     Log.i(TAG, "Received SMS: " + message + ", Sender: " + senderAddress);
 
@@ -73,17 +77,38 @@ public class SmsReceiver extends BroadcastReceiver {
 
 	public void createNewContact(Boolean exists) {
     	if (!exists) {
+
 		    ContactData contactData = new ContactData();
 		    contactData.setFirstName("");
 		    contactData.setLastName("");
 		    contactData.setPhoneNumber(senderAddress);
 		    contactData.setEmail("");
 		    contactData.setBirthday("");
-		    contactData.setContactName("");
+		    contactData.setContactName(makeContactName(contactData));
 		    contactData.setPhotoUri("");
 		    presenter.addContactToDb(contactData);
 		    Intent i = new Intent("contact.added");
 		    context.sendBroadcast(i);
 	    }
+	}
+
+	private String makeContactName(ContactData contactData) {
+		String[] contactInfo = {contactData.getFirstName(), contactData.getLastName(),
+			contactData.getPhoneNumber(), contactData.getEmail()};
+
+		StringBuilder contactName = new StringBuilder();
+		String value;
+		int counter = 0;
+
+		for (int i = 0; i < contactInfo.length; i++) {
+			value = contactInfo[i];
+			if (counter >= 1 && i >= 2)
+				break;
+			if (!value.equals("")) {
+				contactName.append(value).append(" ");
+				counter++;
+			}
+		}
+		return String.valueOf(contactName);
 	}
 }

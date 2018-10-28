@@ -58,6 +58,9 @@
     <!--Call-->
     <string name="request_call_permission_1">Для здійснення дзвінка ft_hangouts потрібен доступ до телефону.</string>
     <string name="request_call_permission_2">Щоб здійснити дзвінок ft_hangouts потрібен дозвіл на доступ до телефону. Щоб надати дозвіл вручну перейдіть в Налаштування, виберіть Програми, знайдіть ft_hangouts, потім виберіть Дозволи і включіть Телефон.</string>
+    <!--SMS-->
+    <string name="request_sms_permission_1">Для відправлення та читання повідомлень дозвольте ft_hangouts доступу до SMS.</string>
+    <string name="request_sms_permission_2">Для відправлення та читання повідомлень дозвольте ft_hangouts доступу до SMS. Щоб надати дозвіл вручну перейдіть в Налаштування, виберіть Програми, знайдіть ft_hangouts, потім виберіть Дозволи і включіть SMS.</string>
 
 
 
@@ -68,6 +71,9 @@
     <string name="negative_response_storage_permission">Доступ до пам\'яті не було надано.</string>
 	<!--Call-->
 	<string name="negative_response_call_permission">Доступ до телефону не був наданий.</string>
+    <!--SMS-->
+    <string name="positive_response_sms_permission">Доступ до SMS було надано.</string>
+    <string name="negative_response_sms_permission">Доступ до SMS не було надано.</string>
 
 
     <string name="fill_in_please">Введіть більше інформації про контакт</string>

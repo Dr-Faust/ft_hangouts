@@ -58,6 +58,9 @@
     <!--Call-->
     <string name="request_call_permission_1">Для осуществления звонка ft_hangouts требуется доступ к телефону.</string>
     <string name="request_call_permission_2">Чтобы осуществить звонок ft_hangouts требуется разрешение на доступ к телефону. Что бы предоставить разрешение вручную перейдите в Настройки, выберите Приложения, найдите ft_hangouts, затем выберите Разрешения и включите Телефон.</string>
+    <!--SMS-->
+    <string name="request_sms_permission_1">Для отправления и чтения сообщений разрешите ft_hangouts доступ к SMS.</string>
+    <string name="request_sms_permission_2">Для отправления и чтения сообщений разрешите ft_hangouts доступ к SMS. Что бы предоставить разрешение вручную перейдите в Настройки, выберите Приложения, найдите ft_hangouts, затем выберите Разрешения и включите SMS.</string>
 
 
     <!--Permissions responses-->
@@ -67,6 +70,9 @@
     <string name="negative_response_storage_permission">Доступ к памяти не был предоставлен.</string>
 	<!--Call-->
 	<string name="negative_response_call_permission">Доступ к телефону не был предоставлен.</string>
+    <!--SMS-->
+    <string name="positive_response_sms_permission">Доступ к SMS был предоставлен.</string>
+    <string name="negative_response_sms_permission">Доступ к SMS не был предоставлен.</string>
 
 
     <string name="fill_in_please">Введите больше информации ок контакте</string>
